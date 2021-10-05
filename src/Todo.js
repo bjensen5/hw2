@@ -1,13 +1,17 @@
 import React from 'react'
 
-export default function Todo ({ title, description, author }) {
-  return (
-       <div>
-          <h3>{title}</h3>
-          <div>{description}</div>
-          <div>{new Date().toString()}</div>
-          <br />
-          <i>created by <b>{author}</b></i>
-      </div> 
- )
+export default function Todo ({ title, description, dateCreated, completed, dateCompleted }) {
+
+     return (
+          <div>
+               <h3>{title}</h3>
+               <div>{description}</div>
+               <br />
+               <div><i>created on:</i><br />{dateCreated}</div>
+               <input type="checkbox" value={completed} />
+         
+               <i>completed? <b>{dateCompleted}</b> </i>
+          
+          </div> 
+     )
 }

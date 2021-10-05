@@ -10,15 +10,31 @@ function userReducer (state, action) {
     }
 }
 
-  function todoReducer (state, action) {
+function todoReducer (state, action) {
     switch (action.type) {
         case 'CREATE_TODO':
           const newTodo = { 
               title: action.title,
               description: action.description, 
-              author: action.author 
+              dateCreated: new Date().toString(),
+              
             }
             return [ newTodo, ...state ]
+        case 'TOGGLE_TODO':
+            const toggledTodo = {
+                completed: action.completed,
+                dateCompleted: new Date().toString(),
+            }
+            return [ toggledTodo, ...state ]
+        case 'DELETE_TODO':
+            const deletedTodo = {
+                title: '',
+                description: '',
+                dateCreated: '',
+                completed: ''
+            }
+            return [ deletedTodo, ...state ]
+
         default:
            return state;
     }
