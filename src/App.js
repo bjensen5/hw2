@@ -1,45 +1,68 @@
-import React, { useState } from "react";
+import {useState, useReducer, useEffect} from 'react';
 
-import Todos from "./Todos";
-import UserBar from "./user/Userbar";
-import CreateTodo from "./CreateTodo";
-import TodoList from "./TodoList";
-
+import MyName from './MyName'
+import UserBar from './user/UserBar'
+import CreateTodo from './CreateTodo'
+import TodoList from './TodoList'
+import appReducer from './reducers';
+import react from 'react'
 
 function App() {
 
-  const [ user, setUser ] = useState('')
-
   const initialTodos = [
     {
-      title: "New To-do 1",
-      description: "This is the description for new task #1. Have fun accomplishing and being great!",
-      dateCreated: "09/27/2021",
-      complete: "incomplete",
-      dateCompleted: ""
+      title: "My Post",
+      content: "Some text",
+      author: "Paul"
     },
     {
-      title: "New To-do 2",
-      description: "This is the description for new to-do #2. Have fun learning and being a really amazing person!",
-      dateCreated: "09/28/2021",
-      complete: "incomplete",
-      dateCompleted: ""
+      title: "My Post",
+      content: "Some text",
+      author: "Paul"
+    },
+    {
+      title: "My Post",
+      content: "Some text",
+      author: "Paul"
+    },
+    {
+      title: "My Post",
+      content: "Some text",
+      author: "Paul"
+    },
+    {
+      title: "My Post",
+      content: "Some text",
+      author: "Paul"
     }
   ]
 
-  const [ todos, setTodos ] = useState(initialTodos)
+  //const [ posts, setPosts ] = useState(initialPosts)
+
+  // const [ user, dispatchUser ] = useReducer(userReducer, '')
+  // const [ posts, dispatchPosts] = useReducer(postReducer, initialPosts)
+
+  const [ state, dispatch ] = useReducer(appReducer, { user: '', todos: initialTodos })
+
+  const {user, todos} = state;
+
+  useEffect(() => {
+    if (user) {
+       document.title = `${user}’s Todos` 
+     } else {
+       document.title = 'Todos'
+   }
+  }, [user])
+
+
 
   return (
-  <div>
-    <UserBar user={user} setUser={setUser} />
-    <hr/>
-    <Todos />
-    <br />
-    { user && <CreateTodo user={user} todos={todos} setTodos={setTodos} /> }
-    <TodoList todos={initialTodos} />
-  </div>
-
-  
+    <div>
+      <UserBar user={user} dispatchUser={dispatch} />
+    <br/><br/><hr/><br/> 
+      {user && <CreateTodo user={user} dispatch={dispatch} /> }
+      <TodoList todos={todos} />
+    </div>
   )
 }
 
