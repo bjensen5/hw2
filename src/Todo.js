@@ -5,7 +5,7 @@ export default function Todo ({ title, description, author }) {
        <div>
           <h3>{title}</h3>
           <div>{description}</div>
-          <div>{Date().toString()}</div>
+          <div>{new Date().toString()}</div>
           <br />
           <i>created by <b>{author}</b></i>
       </div> 
