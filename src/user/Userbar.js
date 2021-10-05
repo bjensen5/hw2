@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Logout from "../Logout";
 import Register from "../Register";
-import Username from "../Username";
+import Login from "../Login";
 
-export default function Userbar() {
-    const user = 'kjghkugb'
+export default function UserBar({ user, setUser }) {
 
     if (user) {
-        return <Logout user={user} />
+        return <Logout user={ user } setUser={ setUser } />
     } else {
         return (
             <>
-                <Username />
-                <Register />
+                <Login setUser={ setUser } />
+                <Register setUser={ setUser }/>
             </>
         )
     }

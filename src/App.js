@@ -1,11 +1,16 @@
-import Tasks from "./Tasks";
-import Userbar from "./user/Userbar";
-import CreateTask from "./CreateTask";
-import Tasklist from "./Tasklist";
+import React, { useState } from "react";
+
+import Todos from "./Todos";
+import UserBar from "./user/Userbar";
+import CreateTodo from "./CreateTodo";
+import TodoList from "./TodoList";
 
 
 function App() {
-  const tasks = [
+
+  const [ user, setUser ] = useState('')
+
+  const initialTodos = [
     {
       title: "New To-do 1",
       description: "This is the description for new task #1. Have fun accomplishing and being great!",
@@ -21,15 +26,20 @@ function App() {
       dateCompleted: ""
     }
   ]
+
+  const [ todos, setTodos ] = useState(initialTodos)
+
   return (
   <div>
-    <Userbar />
+    <UserBar user={user} setUser={setUser} />
     <hr/>
-    <Tasks />
+    <Todos />
     <br />
-    <CreateTask name="New Tasks"/>
-    <Tasklist tasks={tasks} />
+    { user && <CreateTodo user={user} todos={todos} setTodos={setTodos} /> }
+    <TodoList todos={initialTodos} />
   </div>
+
+  
   )
 }
 
