@@ -1,39 +1,38 @@
 import {useState, useReducer, useEffect} from 'react';
 
-import MyName from './MyName'
 import UserBar from './user/UserBar'
 import CreateTodo from './CreateTodo'
 import TodoList from './TodoList'
 import appReducer from './reducers';
-import react from 'react'
+
 
 function App() {
 
   const initialTodos = [
     {
-      title: "My Post",
-      content: "Some text",
-      author: "Paul"
+      title: "old todo",
+      description: "Build beautiful art",
+      author: "jehovah"
     },
     {
-      title: "My Post",
-      content: "Some text",
-      author: "Paul"
+      title: "old todo",
+      description: "Make charitable contributions",
+      author: "jehovah"
     },
     {
-      title: "My Post",
-      content: "Some text",
-      author: "Paul"
+      title: "old todo",
+      description: "Buy a Ferrari",
+      author: "jehovah"
     },
     {
-      title: "My Post",
-      content: "Some text",
-      author: "Paul"
+      title: "old todo",
+      description: "Build health and wealth",
+      author: "jehovah"
     },
     {
-      title: "My Post",
-      content: "Some text",
-      author: "Paul"
+      title: "old todo",
+      description: "get gmi money",
+      author: "jehovah"
     }
   ]
 
