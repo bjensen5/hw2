@@ -17,23 +17,23 @@ function todoReducer (state, action) {
               title: action.title,
               description: action.description, 
               dateCreated: new Date().toString(),
-              
+              completed: false,
+              dateCompleted: undefined
             }
             return [ newTodo, ...state ]
+
         case 'TOGGLE_TODO':
-            const toggledTodo = {
-                completed: action.completed,
-                dateCompleted: new Date().toString(),
-            }
-            return [ toggledTodo, ...state ]
+            return state.map((t, i) => {
+                if(i === action.todoId) {
+                    t.completed = action.completed;
+                    t.dateCompleted = Date().toString();
+                    console.log(t);
+                }
+                return t;
+            })
+
         case 'DELETE_TODO':
-            const deletedTodo = {
-                title: '',
-                description: '',
-                dateCreated: '',
-                completed: ''
-            }
-            return [ deletedTodo, ...state ]
+            return state.filter((t, i ) => i !== action.todoId);
 
         default:
            return state;
