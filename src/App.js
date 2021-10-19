@@ -18,33 +18,7 @@ function App() {
     method: 'get'
   }))
 
-  const initialTodos = [
-    {
-      title: "old todo",
-      description: "Build beautiful art",
-      author: "jehovah"
-    },
-    {
-      title: "old todo",
-      description: "Make charitable contributions",
-      author: "jehovah"
-    },
-    {
-      title: "old todo",
-      description: "Buy a Ferrari",
-      author: "jehovah"
-    },
-    {
-      title: "old todo",
-      description: "Build health and wealth",
-      author: "jehovah"
-    },
-    {
-      title: "old todo",
-      description: "get gmi money",
-      author: "jehovah"
-    }
-  ]
+ 
 
   //const [ posts, setPosts ] = useState(initialPosts)
 
@@ -65,8 +39,8 @@ function App() {
   const {user} = state;
 
   const [ theme, setTheme ] = useState({
-    primaryColor: 'black',
-    secondaryColor: 'green'
+    primaryColor: 'green',
+    secondaryColor: 'pink'
   })
 
   return (

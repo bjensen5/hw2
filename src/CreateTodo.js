@@ -1,10 +1,15 @@
 import React, {useState} from 'react'
+import { useContext } from 'react/cjs/react.development'
+import { StateContext } from './Contexts'
 
-export default function CreateTodo ({user, dispatch}) {
+export default function CreateTodo () {
 
     const [ title, setTitle ] = useState('')
     const [ description, setDescription ] = useState('')
     const [ dateCreated, setDateCreated ] = useState('')
+
+    const { state, dispatch } = useContext(StateContext)
+    const { user } = state;
     
 
     function handleTitle (evt) { setTitle(evt.target.value) }
