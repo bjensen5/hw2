@@ -6,9 +6,9 @@ import CreateTodo from './CreateTodo'
 import TodoList from './TodoList'
 import appReducer from './reducers';
 import Header from './Header'
-import ChangeTheme from './ChangeTheme';
 
-import { ThemeContext, StateContext} from './Contexts'
+
+import { StateContext} from './Contexts'
 
 
 function App() {
@@ -38,26 +38,19 @@ function App() {
 
   const {user} = state;
 
-  const [ theme, setTheme ] = useState({
-    primaryColor: 'green',
-    secondaryColor: 'pink'
-  })
-
   return (
     <div>
-      <ThemeContext.Provider value={theme}>
-        <StateContext.Provider value={{state: state, dispatch: dispatch}}>
-          <Header text="Todo App" />
-          <ChangeTheme theme={theme} setTheme={setTheme} />
-          <UserBar />
+      <StateContext.Provider value={{state: state, dispatch: dispatch}}>
+         <Header text="Todo App" />
 
-          <br/><br/><hr/><br/> 
+        <UserBar />
 
-          {user && <CreateTodo /> }
-          <TodoList />
+        <br/><br/><hr/><br/> 
 
-        </StateContext.Provider>
-      </ThemeContext.Provider>
+        {user && <CreateTodo /> }
+        <TodoList />
+
+      </StateContext.Provider>
     </div>
   )
 }
