@@ -5,12 +5,14 @@
 /.pnp
 .pnp.js
 
-/server
 # testing
 /coverage
 
 # production
 /build
+/server
+/server/private.key
+*.key
 
 # misc
 .DS_Store
