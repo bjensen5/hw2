@@ -1,8 +1,8 @@
 import React from 'react'
 
 export const ThemeContext = React.createContext({
-    primaryColor: 'red',
-    secondaryColor: 'yellow'
+    primaryColor: 'green',
+    secondaryColor: 'orange'
 })
 
 export const StateContext = React.createContext({
