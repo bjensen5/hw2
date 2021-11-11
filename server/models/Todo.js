@@ -6,7 +6,7 @@ const TodoSchema = new Schema(
     {
         title: {type: String, required: true },
         description: {type: String, required: true,},
-        username: {type: Schema.Types.ObjectId, ref: 'User'}
+        author: {type: Schema.Types.ObjectId, ref: 'User'}
     }
 );
 
