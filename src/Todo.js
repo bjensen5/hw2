@@ -1,22 +1,61 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
+import { Link } from 'react-navi'
+import { Card, Button } from 'react-bootstrap'
 import { ThemeContext, StateContext } from './Contexts'
+import { useResource } from 'react-request-hook'
 
 export default function Todo ({ title, description, dateCreated, completed, dateCompleted, todoId }) {
 
      const {socondaryColor} = useContext(ThemeContext);
      const {dispatch} = useContext(StateContext);
 
+     const [deletedTodo, deleteTodo] = useResource((todoId) => ({
+          url: `/todos/${todoId}`,
+          method: "delete"
+     }));
+  
+     const [toggledTodo, toggleTodo] = useResource((todoId, completed) => ({
+          url: `/todos/${todoId}`,
+          method: "patch",
+          data: {
+              complete:completed,
+              completedOn: Date(dateCompleted).toLocaleDateString('en-us')
+          }
+     }));
+
+     useEffect(() => {
+          if (deletedTodo && deletedTodo.data && deletedTodo.isLoading === false) {
+                dispatch({type: 'DELETE_TODO', todoId: todoId})
+          }
+     }, [deletedTodo])
+
+     useEffect(() => {
+          if (toggledTodo && toggledTodo.data && toggledTodo.isLoading === false) {
+                dispatch({ type: 'TOGGLE_TODO', complete:toggledTodo.data.complete, completedOn:toggledTodo.data.completedOn, todoId })
+          }
+     }, [toggledTodo])
+
+  
      return (
-          <div>
-               <h3>{title}</h3>
-               <div>{description}</div>
-               <br />
-               <div><i>created on:</i><br />{dateCreated}</div>
-               <input type="checkbox" onClick={e => {dispatch({type: 'TOGGLE_TODO', completed: !completed, todoId: todoId})}} />
-               <button onClick={(e) => {dispatch({type: 'DELETE_TODO', todoId: todoId})}}>Delete Todo</button>
-               {completed && <><br /><i>todo completed on: {new Date(dateCompleted).toLocaleDateString('en-us')}</i><br /></>}
-               <hr/>
-          
-          </div> 
-     )
+          <Card>
+          <Card.Body>
+              <Card.Title><Link style={{ color: secondaryColor }} href={`/todo/${todoId}`}>{title}</Link>
+              </Card.Title>
+              <Card.Subtitle>
+              <i>Todoer <b>{author}</b></i>
+              </Card.Subtitle>
+              <Card.Text>
+                  {description}
+              </Card.Text>
+              
+               <input type="checkbox" checked={complete} onChange={e => {toggleTodo(todoId, e.target.checked)}} />
+               <Button variant="link" onClick={(e) => {deleteTodo(todoId)}}>Delete Todo</Button>
+              {complete && <i>Completed on: {new Date(completedOn).toLocaleDateString('en-us')}</i>}
+            
+          </Card.Body>
+          </Card>
+
+ )
 }
+
+export default React.memo(Todo);

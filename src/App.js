@@ -1,56 +1,61 @@
 import React, {useState, useReducer, useEffect} from 'react';
+import { mount, route } from 'navi';
+import { Router, View } from 'react-navi';
+
+import {Container} from 'react-bootstrap';
 import { useResource } from 'react-request-hook';
 
-import UserBar from './user/UserBar'
-import CreateTodo from './CreateTodo'
-import TodoList from './TodoList'
+import UserBar from './user/UserBar';
+import CreateTodo from './CreateTodo';
+import TodoPage from './pages/TodoPage';
+import HeaderBar from './pages/HeaderBar';
+import HomePage from './pages/HomePage';
+import TodoList from './TodoList';
 import appReducer from './reducers';
-import Header from './Header'
+import Header from './Header';
 
-
-import { StateContext} from './Contexts'
+import { ThemeContext, StateContext} from './Contexts';
 
 
 function App() {
 
-  const [ todos, getTodos ] = useResource(() => ({
-    url: '/todos',
-    method: 'get'
-  }))
-
- 
-
-  //const [ posts, setPosts ] = useState(initialPosts)
-
-  // const [ user, dispatchUser ] = useReducer(userReducer, '')
-  // const [ posts, dispatchPosts] = useReducer(postReducer, initialPosts)
-
-  const [ state, dispatch ] = useReducer(appReducer, { user: '', todos: [] })
-
-
-  useEffect(getTodos, [])
-
-  useEffect(() => {
-    if (todos && todos.data) {
-      dispatch({ type: 'FETCH_TODOS', todos: todos.data })
-    }
-  }, [todos])
+  const [ state, dispatch ] = useReducer(appReducer, { user: {}, todos: [] })
 
   const {user} = state;
 
+  const [ theme, setTheme ] = useState({
+    primaryColor: 'red',
+    secondaryColor: 'yellow'
+  })
+
+  const routes = mount({
+    '/': route({ view: <HomePage /> }),
+    '/todo/create':route({ view: <CreateTodo /> }),
+    '/todo/:id': route(req => {
+        return { view: <TodoPage id={req.params.id} /> }
+    }),
+  })
+
+  // useEffect(getTodos, [])
+  // useEffect(() => {
+  //  if (todos && todos.data) {
+  //    dispatch({ type: 'FETCH_TODOS', todos: todos.data })
+  //  }
+  // }, [todos])
+
   return (
     <div>
-      <StateContext.Provider value={{state: state, dispatch: dispatch}}>
-         <Header text="Todo App" />
-
-        <UserBar />
-
-        <br/><br/><hr/><br/> 
-
-        {user && <CreateTodo /> }
-        <TodoList />
-
-      </StateContext.Provider>
+      <ThemeContext.Provider value={theme}>
+        <StateContext.Provider value={{state: state, dispatch: dispatch}}>
+          <Router routes={routes}>
+            <Container>
+                <HeaderBar setTheme={setTheme} />
+                <hr />
+                <View />
+            </Container>
+            </Router>
+        </StateContext.Provider>
+      </ThemeContext.Provider>
     </div>
   )
 }
