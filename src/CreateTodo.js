@@ -7,6 +7,9 @@ import { useNavigation } from 'react-navi'
 export default function CreateTodo () {
     const [ title, setTitle ] = useState('')
     const [ description, setDescription ] = useState('')
+
+    const navigation = useNavigation();
+
     const [ dateCreated, setDateCreated ] = useState('')
 
     const { state, dispatch } = useContext(StateContext)
@@ -16,7 +19,7 @@ export default function CreateTodo () {
         url: '/todo',
         method: 'post',
         headers: {"Authorization": `${state.user.access_token}`},
-        data: { title, description, author  }
+        data: { title, description, author }
     }))
     
 

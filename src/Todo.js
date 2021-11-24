@@ -6,7 +6,7 @@ import { useResource } from 'react-request-hook'
 
 function Todo ({ title, description, dateCreated, completed, dateCompleted, todoId }) {
 
-     const {socondaryColor} = useContext(ThemeContext);
+     const {secondaryColor} = useContext(ThemeContext);
      const {dispatch} = useContext(StateContext);
 
      const [deletedTodo, deleteTodo] = useResource((todoId) => ({
@@ -19,7 +19,7 @@ function Todo ({ title, description, dateCreated, completed, dateCompleted, todo
           method: "patch",
           data: {
               complete:completed,
-              completedOn: Date(dateCompleted).toLocaleDateString('en-us')
+              dateCompleted: Date(dateCompleted).toLocaleDateString('en-us')
           }
      }));
 
@@ -31,7 +31,7 @@ function Todo ({ title, description, dateCreated, completed, dateCompleted, todo
 
      useEffect(() => {
           if (toggledTodo && toggledTodo.data && toggledTodo.isLoading === false) {
-                dispatch({ type: 'TOGGLE_TODO', complete:toggledTodo.data.complete, completedOn:toggledTodo.data.completedOn, todoId })
+                dispatch({ type: 'TOGGLE_TODO', complete:toggledTodo.data.complete, dateCompleted:toggledTodo.data.dateCompleted, todoId })
           }
      }, [toggledTodo])
 
@@ -42,15 +42,15 @@ function Todo ({ title, description, dateCreated, completed, dateCompleted, todo
               <Card.Title><Link style={{ color: secondaryColor }} href={`/todo/${todoId}`}>{title}</Link>
               </Card.Title>
               <Card.Subtitle>
-              <i>Todoer <b>{author}</b></i>
+         
               </Card.Subtitle>
               <Card.Text>
                   {description}
               </Card.Text>
               
-               <input type="checkbox" checked={complete} onChange={e => {toggleTodo(todoId, e.target.checked)}} />
+               <input type="checkbox" checked={completed} onChange={e => {toggleTodo(todoId, e.target.checked)}} />
                <Button variant="link" onClick={(e) => {deleteTodo(todoId)}}>Delete Todo</Button>
-              {complete && <i>Completed on: {new Date(completedOn).toLocaleDateString('en-us')}</i>}
+              {completed && <i>Completed on: {new Date(dateCompleted).toLocaleDateString('en-us')}</i>}
             
           </Card.Body>
           </Card>
