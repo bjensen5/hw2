@@ -4,7 +4,7 @@ import { useResource } from 'react-request-hook';
 
 function ThemeItem ({ theme, active, onClick }) {
     return (
-       <span onClick={onClick} style={{ cursor: 'pointer', paddingLeft: 6.66, fontWeight: active ? 'bold' : 'normal' }}>
+       <span onClick={onClick} style={{ cursor: 'pointer', paddingLeft: 10, fontWeight: active ? 'bold' : 'normal' }}>
            <span style={{ color: theme.primaryColor }}>Primary</span> / 
            <span style={{ color: theme.secondaryColor }}>Secondary</span>
         </span>

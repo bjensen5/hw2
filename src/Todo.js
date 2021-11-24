@@ -4,7 +4,7 @@ import { Card, Button } from 'react-bootstrap'
 import { ThemeContext, StateContext } from './Contexts'
 import { useResource } from 'react-request-hook'
 
-export default function Todo ({ title, description, dateCreated, completed, dateCompleted, todoId }) {
+function Todo ({ title, description, dateCreated, completed, dateCompleted, todoId }) {
 
      const {socondaryColor} = useContext(ThemeContext);
      const {dispatch} = useContext(StateContext);

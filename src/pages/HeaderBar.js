@@ -17,7 +17,7 @@ export default function HeaderBar ({setTheme }) {
     const {user} = state;
 
     return (
-        <Navbar bg="dark" expand="lg">
+        <Navbar bg="light" expand="lg">
         <Container>
           <Navbar.Brand href="/"><Header text="Todo App" /></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

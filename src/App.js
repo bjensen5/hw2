@@ -3,16 +3,13 @@ import { mount, route } from 'navi';
 import { Router, View } from 'react-navi';
 
 import {Container} from 'react-bootstrap';
-import { useResource } from 'react-request-hook';
 
-import UserBar from './user/UserBar';
 import CreateTodo from './CreateTodo';
 import TodoPage from './pages/TodoPage';
 import HeaderBar from './pages/HeaderBar';
 import HomePage from './pages/HomePage';
 import TodoList from './TodoList';
 import appReducer from './reducers';
-import Header from './Header';
 
 import { ThemeContext, StateContext} from './Contexts';
 
@@ -24,8 +21,8 @@ function App() {
   const {user} = state;
 
   const [ theme, setTheme ] = useState({
-    primaryColor: 'red',
-    secondaryColor: 'yellow'
+    primaryColor: 'deepskyblue',
+    secondaryColor: 'coral'
   })
 
   const routes = mount({

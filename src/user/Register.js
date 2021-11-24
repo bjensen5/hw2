@@ -14,11 +14,6 @@ export default function Register({show, handleClose}) {
     passwordRepeat: ""
 })
 
-const [formData, setFormData] = useState({
-  username: "",
-  password: "",
-  passwordRepeat: ""
-})
 
 const [status, setStatus] = useState("")
 
@@ -35,16 +30,19 @@ useEffect(() => {
 }, [user])
 
 useEffect(() => {
-  if (user.error) {
-    console.log(user)
-    setStatus("Registration failed... ")
-    alert("ngmi")
-  } else {
-    console.log(user)
-    setStatus("Registration successful!")
-    alert("wgmi")
+  if (user && user.isLoading === false && (user.data || user.error)) {
+    if (user.error) {
+      console.log(user)
+      setStatus("Registration failed... ")
+      alert("ngmi")
+    } else {
+      console.log(user)
+      setStatus("Registration successful!")
+      alert("wgmi")
+    }
   }
 }, [user])
+  
 
 
 return (
