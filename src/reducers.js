@@ -33,14 +33,13 @@ function todoReducer (state, action) {
             return state.map((t) => {
                 if(t.id === action.todoId) {
                     t.completed = action.completed;
-                    t.dateCompleted = new Date().toString();
-                    console.log(t);
+                    t.dateCompleted = action.dateCompleted;
                 }
                 return t;
             })
 
         case 'DELETE_TODO':
-            return state.filter((t) => t.id !== action.todoId);
+            return state.filter((t) => t.id !== action.todoId)
 
         case 'FETCH_TODOS':
             return action.todos

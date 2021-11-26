@@ -15,11 +15,11 @@ export default function CreateTodo () {
     const { state, dispatch } = useContext(StateContext)
     const { user } = state;
 
-    const [ todo, createTodo ] = useResource(({ title, description, author }) => ({
+    const [ todo, createTodo ] = useResource(({ title, description }) => ({
         url: '/todo',
         method: 'post',
         headers: {"Authorization": `${state.user.access_token}`},
-        data: { title, description, author }
+        data: { title, description }
     }))
     
 
@@ -28,12 +28,12 @@ export default function CreateTodo () {
     function handleDescription (evt) { setDescription(evt.target.value) }
 
     function handleCreate() {
-        createTodo({ title, description, author: user.username})
+        createTodo({ title, description })
     }
 
     useEffect(() => {
         if (todo && todo.data) {
-            dispatch({ type: 'CREATE_TODO', title: todo.data.title, description: todo.data.description, id: todo.data.id, author: user.username })
+            dispatch({ type: 'CREATE_TODO', title: todo.data.title, description: todo.data.description, dateCreated: Date().toString(), completed: false, id: todo.data.id })
             console.log(todo.data)
             navigation.navigate(`/todo/${todo.data.id}`)
         }
