@@ -11,7 +11,7 @@ import { Navbar, Nav, Container } from 'react-bootstrap'
 
 import { ThemeContext, StateContext } from '../Contexts'
 
-export default function HeaderBar ({setTheme }) {
+export default function HeaderBar ({ setTheme }) {
     const theme = useContext(ThemeContext)
     const {state} = useContext(StateContext)
     const {user} = state;

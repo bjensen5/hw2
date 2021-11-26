@@ -14,12 +14,12 @@ function Todo ({ title, description, dateCreated, completed, dateCompleted, todo
           method: "delete"
      }));
   
-     const [toggledTodo, toggleTodo] = useResource((todoId, completed) => ({
+     const [toggledTodo, toggleTodo] = useResource((todoId, todocompleted) => ({
           url: `/todos/${todoId}`,
           method: "patch",
           data: {
-              complete:completed,
-              dateCompleted: Date(dateCompleted).toLocaleDateString('en-us')
+              completed:todocompleted,
+              dateCompleted: Date.toLocaleDateString('en-us')
           }
      }));
 
@@ -31,7 +31,7 @@ function Todo ({ title, description, dateCreated, completed, dateCompleted, todo
 
      useEffect(() => {
           if (toggledTodo && toggledTodo.data && toggledTodo.isLoading === false) {
-                dispatch({ type: 'TOGGLE_TODO', complete:toggledTodo.data.complete, dateCompleted:toggledTodo.data.dateCompleted, todoId })
+                dispatch({ type: 'TOGGLE_TODO', completed:toggledTodo.data.completed, dateCompleted:toggledTodo.data.dateCompleted, todoId })
           }
      }, [toggledTodo])
 

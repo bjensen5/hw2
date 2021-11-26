@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react'
-import { useContext } from 'react/cjs/react.development';
+import React, {useState, useEffect, useContext} from 'react'
 import { StateContext } from '../Contexts';
 import {Form, Modal, Button} from 'react-bootstrap'
 import { useResource } from 'react-request-hook';
@@ -40,6 +39,7 @@ useEffect(() => {
       setStatus("Registration successful!")
       alert("wgmi")
     }
+    //dispatch({ type: 'REGISTER', username: user.data.username })
   }
 }, [user])
   
