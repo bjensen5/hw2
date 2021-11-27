@@ -15,11 +15,11 @@ export default function CreateTodo () {
     const { state, dispatch } = useContext(StateContext)
     const { user } = state;
 
-    const [ todo, createTodo ] = useResource(({ title, description }) => ({
+    const [ todo, createTodo ] = useResource(({ title, description, author }) => ({
         url: '/todo',
         method: 'post',
         headers: {"Authorization": `${state.user.access_token}`},
-        data: { title, description }
+        data: { title, description, author }
     }))
     
 
@@ -28,7 +28,7 @@ export default function CreateTodo () {
     function handleDescription (evt) { setDescription(evt.target.value) }
 
     function handleCreate() {
-        createTodo({ title, description })
+        createTodo({ title, description, author: user.username })
     }
 
     useEffect(() => {

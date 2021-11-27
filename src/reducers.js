@@ -23,6 +23,7 @@ function todoReducer (state, action) {
               id: action.id,
               title: action.title,
               description: action.description, 
+              author: action.author,
               dateCreated: new Date().toString(),
               completed: false,
               dateCompleted: undefined
